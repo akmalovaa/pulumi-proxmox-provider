@@ -1,10 +1,8 @@
 # Pulumi Proxmox Provider
 
-Proxmox native Pulumi provider written in Python
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Build pulumi provider [docs](https://www.pulumi.com/docs/iac/build-with-pulumi/build-a-provider/)
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This repository contains a Pulumi Provider for managing Proxmox VE resources. It allows you to define and manage Proxmox VE resources using Pulumi's infrastructure-as-code approach. (Сurrently in early development stage - focused on LXC container management using)
 
