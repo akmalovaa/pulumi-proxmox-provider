@@ -1,0 +1,9 @@
+name: pulumi-proxmox-dev
+# runtime: python
+runtime:
+  name: python
+  options:
+    toolchain: uv
+    virtualenv: .venv
+description: Development project for Proxmox provider
+main: main.py

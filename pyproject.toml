@@ -1,0 +1,109 @@
+[project]
+name = "pulumi-proxmox-provider"
+version = "0.1.0"
+description = "A Pulumi provider for Proxmox VE Python"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Akmalov Artur", email = "artur@akmalov.com" }]
+maintainers = [{ name = "Akmalov Artur", email = "artur@akmalov.com" }]
+keywords = ["pulumi", "proxmox", "infrastructure", "iac", "provider"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Systems Administration",
+]
+requires-python = ">=3.11"
+dependencies = ["pulumi>=3.200.0", "requests>=2.25.0"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "mypy>=0.950",
+    "pre-commit>=4.3.0",
+]
+docs = ["sphinx>=4.0.0", "sphinx-rtd-theme>=1.0.0", "myst-parser>=0.17.0"]
+
+[project.urls]
+Homepage = "https://github.com/akmalovaa/pulumi-proxmox-provider"
+Documentation = "https://github.com/akmalovaa/pulumi-proxmox-provider/docs"
+Repository = "https://github.com/akmalovaa/pulumi-proxmox-provider"
+"Bug Tracker" = "https://github.com/akmalovaa/pulumi-proxmox-provider/issues"
+Changelog = "https://github.com/akmalovaa/pulumi-proxmox-provider/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 120
+target-version = ['py312', 'py313']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 120
+known_first_party = ["pulumi_proxmox_provider"]
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--cov=pulumi_proxmox_provider --cov-report=term-missing --cov-report=html"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+    "pytest>=8.3.5",
+]
