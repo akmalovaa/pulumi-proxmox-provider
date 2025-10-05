@@ -150,3 +150,11 @@ Preview changes:
 ```sh
 uv run pulumi preview --diff
 ```
+
+Pre-hook verify manual:
+
+```sh
+uv run pre-commit run --all-files --hook-stage manual
+# or commit disable hooks
+git commit -m "Update pre-commit configuration to fixed versions" --no-verify
+```
