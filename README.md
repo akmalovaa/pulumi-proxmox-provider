@@ -23,6 +23,18 @@ Existing Terraform/Pulumi providers have limitations that affect my workflow:
 
 This provider is written in **Python** for easier development and customization.
 
+## 🔗 Alternative Proxmox IaC Solutions
+
+### Terraform Providers
+
+- [Telmate/terraform-provider-proxmox](https://github.com/Telmate/terraform-provider-proxmox) - Original Terraform provider
+- [BPG/terraform-provider-proxmox](https://github.com/bpg/terraform-provider-proxmox) - Community-maintained fork
+
+### Pulumi Providers
+
+- [muhlba91/pulumi-proxmoxve](https://github.com/muhlba91/pulumi-proxmoxve) - Comprehensive Pulumi provider
+- [hctamu/pulumi-pve](https://github.com/hctamu/pulumi-pve) - Alternative Pulumi implementation
+
 ## 📦 Features
 
 ### Current Implementation
@@ -83,18 +95,16 @@ from pulumi_proxmox_provider import LXCContainer, LXCContainerArgs
 
 # Configuration
 config = pulumi.Config("proxmox")
-node = config.get("node", "pve1")
 
 # Create LXC container
 lxc = LXCContainer(
     "my-test-container",
     LXCContainerArgs(
-        node=node,
+        node=config.get("node", "pve"),
         vm_id=210,
         hostname="test-container",
-        cores=1,
+        cores=2,
         memory=512,
-        swap=256,
         ostemplate="local:vztmpl/ubuntu-24.10-standard_24.10-1_amd64.tar.zst",
         password="secure-password",
         unprivileged=True,
@@ -113,18 +123,6 @@ pulumi.export("container_hostname", lxc.hostname)
 ```
 
 For more examples, check the [`examples/`](./examples/) directory.
-
-## 🔗 Alternative Proxmox IaC Solutions
-
-### Terraform Providers
-
-- [Telmate/terraform-provider-proxmox](https://github.com/Telmate/terraform-provider-proxmox) - Original Terraform provider
-- [BPG/terraform-provider-proxmox](https://github.com/bpg/terraform-provider-proxmox) - Community-maintained fork
-
-### Pulumi Providers
-
-- [muhlba91/pulumi-proxmoxve](https://github.com/muhlba91/pulumi-proxmoxve) - Comprehensive Pulumi provider
-- [hctamu/pulumi-pve](https://github.com/hctamu/pulumi-pve) - Alternative Pulumi implementation
 
 ### Resources
 
